@@ -219,7 +219,9 @@ void FFMPEGEncoder::doOpenCodec(int width, int height)
     codecContext_->sw_pix_fmt = frames_ctx->sw_format;
     codecContext_->pix_fmt = frames_ctx->format;
   } else {
-    codecContext_->pix_fmt = utils::get_preferred_pixel_format(codecName_, pixFmts);
+    // TODO: See how to detect platform:bcm2835-codec (Raspberry Pi)
+    codecContext_->pix_fmt = AV_PIX_FMT_YUV420P;
+    // codecContext_->pix_fmt = utils::get_preferred_pixel_format(codecName_, pixFmts);
     codecContext_->sw_pix_fmt = codecContext_->pix_fmt;
   }
 
